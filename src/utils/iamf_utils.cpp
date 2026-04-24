@@ -4,6 +4,7 @@
 #include <cstdio>
 #include <memory>
 #include <stdexcept>
+#include <algorithm>
 
 namespace
 {

@@ -408,7 +408,25 @@ const RuleDesc iamfRules[] = {
           }
         }
       }
-    } }
+    } },
+    { "Section 3.7.4\n"
+      "There SHALL be no duplicate values of anchor_element within one LoudnessInfo()",
+      "assert-3.7.4-1",
+      [](Box const &root, IReport *out) {
+        auto iacbBoxes = findBoxes(root, FOURCC("iacb"));
+        for(auto &iacbBox : iacbBoxes) {
+          bool found = false;
+          for(auto &sym : iacbBox->syms) {
+            if(std::string(sym.name) == "duplicate_anchor_error") {
+              out->error("Duplicate anchor_element found in LoudnessInfo");
+              found = true;
+            }
+          }
+          if(!found) {
+            out->covered();
+          }
+        }
+      } }
 };
 
 const auto iamfPrereq = [](Box const &root) {

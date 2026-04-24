@@ -35,6 +35,6 @@ enum ObuType {
   OBU_IA_SEQUENCE_HEADER = 31,
 };
 
-struct IReader;
+class IReport;
 
 void parseIamfObus(IReader *br, int64_t size);
